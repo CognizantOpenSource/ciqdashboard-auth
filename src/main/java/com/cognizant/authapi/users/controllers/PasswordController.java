@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,5 +24,13 @@ public class PasswordController {
     public ResponseEntity changePassword(@RequestParam("newPassword") CharSequence newPassword,
                                          @RequestParam("oldPassword") CharSequence oldPassword) {
         return passwordService.changePassword(newPassword, oldPassword);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/reset")
+    @PreAuthorize("hasPermission('Password','leap.permission.admin')")
+    public ResponseEntity resetPassword(@RequestParam("userEmailId") String userEmailId,
+                                         @RequestParam("password") CharSequence password) {
+        return passwordService.resetPassword(userEmailId, password);
     }
 }

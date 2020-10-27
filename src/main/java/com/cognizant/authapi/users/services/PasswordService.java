@@ -51,4 +51,23 @@ public class PasswordService {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    public ResponseEntity resetPassword(String userEmailId, CharSequence password) {
+        Optional<User> optionalUser = userService.getUserByEmail(userEmailId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setPassword(passwordEncoder.encode(password));
+            userService.updateUser(user);
+        } else {
+            throw new UserNotFoundException(userEmailId);
+        }
+
+        LeapApiResponse response = new LeapApiResponse(LocalDateTime.now(),
+                HttpStatus.OK.value(),
+                "Success",
+                String.format(RESPONSE_TEMPLATE, userEmailId)
+        );
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

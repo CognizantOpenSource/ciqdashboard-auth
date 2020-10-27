@@ -3,6 +3,7 @@ package com.cognizant.authapi.base.services;
 import com.cognizant.authapi.base.beans.JwtSecurityConstants;
 import com.cognizant.authapi.models.AppTokenStore;
 import com.cognizant.authapi.services.AppTokenStoreService;
+import com.cognizant.authapi.team.services.TeamService;
 import com.cognizant.authapi.users.beans.Account;
 import com.cognizant.authapi.users.beans.Permission;
 import com.cognizant.authapi.users.beans.User;
@@ -38,6 +39,8 @@ public class JwtTokenService {
 
     @Autowired
     AppTokenStoreService appTokenStoreService;
+    @Autowired
+    TeamService teamService;
 
     @PostConstruct
     protected void init() {
@@ -57,6 +60,7 @@ public class JwtTokenService {
         } else {
             validity = new Date(now.getTime() + appExpirationInMs);
         }
+        List<String> teams = teamService.getTeamIdsByUserEmailId(user.getEmail());
         String permissions = user.getAccount().getRoles().stream()
                 .flatMap(role -> role.getPermissions().stream())
                 .map(Permission::getId).collect(Collectors.joining(","));
@@ -68,6 +72,7 @@ public class JwtTokenService {
                 .claim("firstName", user.getFirstName())
                 .claim("lastName", user.getLastName())
                 .claim("active", user.isActive())
+                .claim("teams", teams)
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, secretKey)

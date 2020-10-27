@@ -156,6 +156,10 @@ public class UserService {
         }
     }
 
+    public List<User> getAllUserByEmails(List<String> emails){
+        return userRepository.findAllByEmailIn(emails);
+    }
+
     public UserDTO generateUserDTO(String email) {
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
