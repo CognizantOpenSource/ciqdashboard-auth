@@ -1,42 +1,34 @@
 package com.cognizant.authapi.users.dto;
 
-import com.cognizant.authapi.users.beans.Account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-/**
- * Created by 784420 on 7/17/2019 3:41 PM
- */
 @Data
-public class UserDTO {
-    private String id;
+public class ChangePasswordDto {
 
-    private String firstName;
-    private String lastName;
     @NotBlank(message = "Password should not be empty")
     @Size(min = 8, message = "Password should have at least 8 characters")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$_@!%*#?&])[A-Za-z\\d$_@!%*#?&]{8,20}$",
             message = "Password should have minimum 8 and 20 characters, at least one uppercase letter, one lowercase letter, one number and one special character from $_@!%*#?&")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private CharSequence password;
-    @Email
-    @NotBlank(message = "Email should not be empty")
-    private String email;
-    private String image;
-    @NotBlank(message = "Company/Organization Name should not be empty")
-    @Size(min = 2, message = "Company/Organization Name should have at least 2 characters")
-    private String org;
-    private Account account;
-    private boolean active;
+    private CharSequence newPassword;
+
+    @NotBlank(message = "Password should not be empty")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private CharSequence oldPassword;
 
     @JsonIgnore
-    public CharSequence getPassword() {
-        return password;
+    public CharSequence getOldPassword() {
+        return oldPassword;
+    }
+
+    @JsonIgnore
+    public CharSequence getNewPassword() {
+        return newPassword;
     }
 }

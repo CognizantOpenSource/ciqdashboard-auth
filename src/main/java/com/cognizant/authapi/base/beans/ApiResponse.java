@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NotBlank
 @AllArgsConstructor
 @NoArgsConstructor
-public class LeapApiResponse {
+public class ApiResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime timestamp;
     private int status;

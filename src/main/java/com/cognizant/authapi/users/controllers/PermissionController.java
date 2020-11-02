@@ -31,7 +31,7 @@ public class PermissionController {
      * @return list of permissions which are available in db
      */
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('Permissions','leap.permission.read')")
+    @PreAuthorize("hasPermission('Permissions','permission.view')")
     public List<Permission> getAllPermissions() {
         log.info("Getting all the Permissions from Database.....!");
         return permissionService.getAllPermissions();
@@ -44,7 +44,7 @@ public class PermissionController {
      * @return permission details based on the id
      */
     @GetMapping(value = "/{permissionId}")
-    @PreAuthorize("hasPermission('Permissions','leap.permission.read')")
+    @PreAuthorize("hasPermission('Permissions','permission.view')")
     public Permission getPermission(@PathVariable String permissionId) {
         log.info("Getting Project id is : " + permissionId);
         Optional<Permission> optionalPermission = permissionService.getPermission(permissionId);

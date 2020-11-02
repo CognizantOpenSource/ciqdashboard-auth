@@ -55,7 +55,7 @@ public class ExternalTokenService {
         user.setId(id);
         user.setFirstName(name);
         user.setLastName(name);
-        user.setEmail(name+"@leap-system.com");
+        user.setEmail(name+"@auth-api-system.com");
         user.setAccount(account);
         user.setActive(true);
         return user;

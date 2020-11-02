@@ -14,7 +14,4 @@ public class JwtSecurityConstants {
     public static final String EXTERNAL_TOKEN = "external_token";
     public static final String TOKEN_EXPIRES_AT = "tokenExpiresAt";
 
-    /*Custom Token Constants*/
-    public static final String CUSTOM_TOKEN_ID = "X-leap-token-id";
-    public static final String BEARER_TEMPLATE = "Bearer %s";
 }

@@ -4,6 +4,7 @@ import com.cognizant.authapi.base.error.CustomInvalidCredentialException;
 import com.cognizant.authapi.base.error.UserNotFoundException;
 import com.cognizant.authapi.users.beans.TokenRequest;
 import com.cognizant.authapi.users.beans.User;
+import com.cognizant.authapi.users.beans.UserLoginDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,17 +22,34 @@ public class NativeUserService {
     PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserLoginDetailsService loginDetailsService;
 
     public User validateUserDetails(TokenRequest tokenRequest) {
-        Optional<User> user = userService.getUserByEmail(tokenRequest.getUsername());
-        if (user.isPresent()) {
-            if (passwordEncoder.matches(tokenRequest.getPassword(), user.get().getPassword())) {
-                return user.get();
+        String username = tokenRequest.getUsername();
+        Optional<User> optional = userService.getUserByEmail(username);
+        if (optional.isPresent()) {
+            User user = optional.get();
+            if (!user.isActive()) throw new CustomInvalidCredentialException(String.format("User account %s is disabled. Please contact administrator.", username));
+            if (passwordEncoder.matches(tokenRequest.getPassword(), user.getPassword())) {
+                loginDetailsService.save(new UserLoginDetails(user.getEmail()));
+                return user;
             } else {
-                throw new CustomInvalidCredentialException("Password", "UserName", tokenRequest.getUsername());
+                Optional<UserLoginDetails> detailsOptional = loginDetailsService.get(username);
+                detailsOptional.ifPresentOrElse(
+                        userLoginDetails -> {
+                            UserLoginDetails save = loginDetailsService.save(userLoginDetails.increaseFailureDetails());
+                            if (save.getFailureCount().get() >= 5) {
+                                user.setActive(false);
+                                userService.updateUser(user);
+                            }
+                        },
+                        () -> loginDetailsService.save(UserLoginDetails.getFirstFailure(username))
+                );
+                throw new CustomInvalidCredentialException("invalid email id/password");
             }
         } else {
-            throw new UserNotFoundException(tokenRequest.getUsername());
+            throw new UserNotFoundException(username);
         }
     }
 }
