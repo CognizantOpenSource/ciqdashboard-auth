@@ -48,8 +48,8 @@ public class CollectorService {
         User getUser = userService.getUserByEmail(email).orElseGet(() -> {
             User user = userService.signUpUser(userService.generateUserDTO(email));
             Role role = roleService.getRole(BaseConstants.CHART_COLLECTOR).orElseGet(() -> {
-                List<Permission> permissions = permissionService.getAllPermissionByIdLike(BaseConstants.LEAP_CHART);
-                permissions.addAll(permissionService.getAllPermissionByIdLike(BaseConstants.LEAP_APP_STATUS));
+                List<Permission> permissions = permissionService.getAllPermissionByIdLike(BaseConstants.CHART);
+                permissions.addAll(permissionService.getAllPermissionByIdLike(BaseConstants.APP_STATUS));
                 Role newRole = new Role();
                 newRole.setName(BaseConstants.CHART_COLLECTOR);
                 newRole.setPermissions(permissions);

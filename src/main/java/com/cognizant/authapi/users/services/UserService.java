@@ -164,7 +164,7 @@ public class UserService {
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
         userDTO.setFirstName(email.substring(0, email.indexOf('@')));
-        userDTO.setOrg("Leap Collector");
+        userDTO.setOrg("Collector Org");
 
         return userDTO;
     }
