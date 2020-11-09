@@ -7,4 +7,8 @@ public class CustomInvalidCredentialException extends RuntimeException {
     public CustomInvalidCredentialException(String credential, String fieldName, String fieldValue) {
         super(String.format("Invalid %s with details %s : %s", credential, fieldName, fieldValue));
     }
+
+    public CustomInvalidCredentialException(String message) {
+        super(message);
+    }
 }
