@@ -194,7 +194,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             ErrorResponse response = new ErrorResponse(LocalDateTime.now(),
                     HttpStatus.FORBIDDEN.value(),
                     HttpStatus.FORBIDDEN.toString(),
-                    "You don’t have required role or privilege to complete this action.",
+                    ex.getMessage(),
                     request.getDescription(false)
             );
             return new ResponseEntity<>(response, new HttpHeaders(), HttpStatus.FORBIDDEN);

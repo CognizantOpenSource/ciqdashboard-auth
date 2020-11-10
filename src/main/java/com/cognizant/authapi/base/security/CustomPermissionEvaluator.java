@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Component
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
-    @Value("${app.permission.admin}")
+    @Value("${app.leap.permission.admin}")
     private String adminPermission;
 
     @Override

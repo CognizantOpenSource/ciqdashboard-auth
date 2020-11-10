@@ -109,6 +109,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
+
     @Bean
     public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
         DefaultHttpFirewall fireWall = new DefaultHttpFirewall();

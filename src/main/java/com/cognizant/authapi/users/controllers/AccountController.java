@@ -37,7 +37,7 @@ public class AccountController {
      * Getting all Accounts
      **/
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('Account','user.account.view')")
+    @PreAuthorize("hasPermission('UserSettings','leap.user.account.read')")
     public List<AccountDTO> getAllAccounts() {
         log.debug("Getting all the Accounts");
         List<Account> accounts = accountService.getAllAccounts();
@@ -48,7 +48,7 @@ public class AccountController {
      * Getting a Account by ID
      **/
     @GetMapping(value = "/{accountId}")
-    @PreAuthorize("hasPermission('Account','user.account.view')")
+    @PreAuthorize("hasPermission('UserSettings','leap.user.account.read')")
     public AccountDTO getAccount(@PathVariable String accountId) {
         Optional<Account> optionalAccount = accountService.getAccount(accountId);
         if (optionalAccount.isPresent()) {
@@ -66,7 +66,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{accountId}")
     @Transactional
-    @PreAuthorize("hasPermission('Account','user.account.update')")
+    @PreAuthorize("hasPermission('UserSettings','leap.user.account.update')")
     public AccountDTO updateAccount(@Valid @RequestBody AccountDTO accountDTO) {
         List<Role> roleList = addAllRoles(accountDTO.getRoleIds());
         log.debug("Updating the Account data " + accountDTO);

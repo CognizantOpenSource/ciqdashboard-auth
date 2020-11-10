@@ -12,8 +12,7 @@ import java.util.List;
 @Service
 public class UserValidationService {
 
-
-    @Value("${app.permission.admin}")
+    @Value("${app.leap.permission.admin}")
     private String adminPermission;
 
     public boolean isAdmin() {

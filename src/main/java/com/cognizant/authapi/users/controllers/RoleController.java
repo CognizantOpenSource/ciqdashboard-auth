@@ -41,7 +41,7 @@ public class RoleController {
      * @return list of roles
      */
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('Role','role.view')")
+    @PreAuthorize("hasPermission('Role','leap.role.read')")
     public List<RoleDTO> getAllRoles() {
         log.info("Getting all the Roles from Database.....!");
         return util.convertToDtoList(roleService.getAllRoles());
@@ -53,7 +53,7 @@ public class RoleController {
      * @return role
      */
     @GetMapping(value = "/{roleId}")
-    @PreAuthorize("hasPermission('Role','role.view')")
+    @PreAuthorize("hasPermission('Role','leap.role.read')")
     public RoleDTO getRole(@PathVariable String roleId) {
         log.info("Getting Project id is : " + roleId);
         Optional<Role> optionalRole = roleService.getRole(roleId);
@@ -73,7 +73,7 @@ public class RoleController {
     @Validated
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "")
-    @PreAuthorize("hasPermission('Role','role.create')")
+    @PreAuthorize("hasPermission('Role','leap.role.create')")
     public RoleDTO addNewRole(@Valid @RequestBody RoleDTO roleDTO) {
         log.info("Adding new Role, Role: " + roleDTO.toString());
         Role role = util.convertToEntity(
@@ -96,7 +96,7 @@ public class RoleController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/addAll")
     @Transactional
-    @PreAuthorize("hasPermission('Role','role.create')")
+    @PreAuthorize("hasPermission('Role','leap.role.create')")
     public List<RoleDTO> addMultipleNewRoles(@Valid @RequestBody List<RoleDTO> roleDTOList) {
         log.info("Adding new Role, Role: " + roleDTOList.toString());
         List<Role> roleList = roleDTOList.stream()
@@ -118,7 +118,7 @@ public class RoleController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{roleId}")
     @Transactional
-    @PreAuthorize("hasPermission('Role','role.update')")
+    @PreAuthorize("hasPermission('Role','leap.role.update')")
     public RoleDTO updateRole(@Valid @RequestBody RoleDTO roleDTO) {
         log.info("Updating the Role data " + roleDTO.toString());
         assertRole(roleDTO.getName());
@@ -135,7 +135,7 @@ public class RoleController {
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/{roleId}")
-    @PreAuthorize("hasPermission('Role','role.delete')")
+    @PreAuthorize("hasPermission('Role','leap.role.delete')")
     public void removeRole(@PathVariable String roleId) {
         log.info("Deleting Role based on id, id is : " + roleId);
         assertRole(roleId);
@@ -148,7 +148,7 @@ public class RoleController {
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/remove")
-    @PreAuthorize("hasPermission('Role','role.delete')")
+    @PreAuthorize("hasPermission('Role','leap.role.delete')")
     public void deleteUser(@RequestBody List<String> roleIds) {
         roleService.deleteRoles(roleIds);
     }

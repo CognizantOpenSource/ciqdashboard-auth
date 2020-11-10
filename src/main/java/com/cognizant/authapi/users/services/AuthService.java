@@ -32,7 +32,7 @@ public class AuthService {
      * Signing up or creating new user based on the Third party application's (Google, Microsoft etc..) token as of now Google implemented
      *
      * @param tokenRequest third party token which is generated and return from application
-     * @return post signing up based on the token will return user detail which are stored in DB
+     * @return post signing up based on the token will return user detail which are stored in leap DB
      */
     public UserDTO getUser(TokenRequest tokenRequest) {
         return tokenIdService.getUser(tokenRequest);
