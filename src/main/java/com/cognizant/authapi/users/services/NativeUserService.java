@@ -27,7 +27,7 @@ public class NativeUserService {
 
     public User validateUserDetails(TokenRequest tokenRequest) {
         String username = tokenRequest.getUsername();
-        Optional<User> optional = userService.getUserByEmail(username);
+        Optional<User> optional = userService.getUserByEmailAndType(username,tokenRequest.getType());
         if (optional.isPresent()) {
             User user = optional.get();
             if (!user.isActive()) throw new CustomInvalidCredentialException(String.format("User account %s is disabled. Please contact administrator.", username));

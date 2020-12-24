@@ -16,4 +16,7 @@ public class BaseConstants {
     public static final String TOKEN_EXPIRES_AT = "tokenExpiresAt";
     public static final String TOKEN_ID = "token-id";
 
+    /*sAMAccountName is the ldap attribute that should match the login name */
+    public static final String SAM_ACCOUNTNAME ="sAMAccountName";
+    public static final String LDAP = "LDAP";
 }

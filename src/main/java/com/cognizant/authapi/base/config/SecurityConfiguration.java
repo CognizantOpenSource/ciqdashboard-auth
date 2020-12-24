@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
+import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.core.support.LdapContextSource;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -38,6 +41,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value("${app.cors.enabled:false}")
     private boolean corsEnabled;
+
+    @Value("${ldap.url}")
+    private String ldapUrl;
+
+    @Value("${ldap.base.dn}")
+    private String ldapBaseDn;
+
+    @Value("${ldap.user.dn.pattern}")
+    private String ldapUserDnPattern;
+
+    @Value("${ldap.user.principal}")
+    private String ldapPrincipal;
+
+    @Value("${ldap.user.password}")
+    private String password;
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -109,7 +127,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-
+    @Bean
+    public LdapContextSource ldapContextSource(){
+        LdapContextSource ldapContextSource =new LdapContextSource();
+        ldapContextSource.setBase(ldapBaseDn);
+        ldapContextSource.setUrl(ldapUrl);
+        ldapContextSource.setUserDn(ldapPrincipal);
+        ldapContextSource.setPassword(password);
+        return ldapContextSource;
+    }
+    @Bean
+    public LdapTemplate ldapTemplate() {
+        return new LdapTemplate(ldapContextSource());
+    }
     @Bean
     public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
         DefaultHttpFirewall fireWall = new DefaultHttpFirewall();

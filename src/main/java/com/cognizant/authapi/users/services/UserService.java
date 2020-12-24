@@ -68,8 +68,14 @@ public class UserService {
      */
     public Optional<User> getUserByEmail(String email) {
         log.info("Getting User based on the email. EmailId is : " + email);
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmailIgnoreCase(email);
     }
+
+    public Optional<User> getUserByEmailAndType(String email, String type) {
+        log.info("Getting User based on the email. EmailId is : " + email);
+        return userRepository.findByEmailIgnoreCaseAndType(email, type);
+    }
+
 
 
     /**
@@ -145,7 +151,7 @@ public class UserService {
      * @return user details post saving in the database
      */
     public User signUpUser(UserDTO userDTO) {
-        if (!getUserByEmail(userDTO.getEmail()).isPresent()) {
+        if (!getUserByEmailAndType(userDTO.getEmail(),userDTO.getType()).isPresent()) {
             Account account = accountService.addNewAccount(
                     accountService.generateAccount(userDTO.getEmail())
             );

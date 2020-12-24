@@ -4,6 +4,7 @@ import com.cognizant.authapi.users.beans.Account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -34,6 +35,8 @@ public class UserDTO {
     private String org;
     private Account account;
     private boolean active;
+    @Value("Native")
+    private String type;
 
     @JsonIgnore
     public CharSequence getPassword() {

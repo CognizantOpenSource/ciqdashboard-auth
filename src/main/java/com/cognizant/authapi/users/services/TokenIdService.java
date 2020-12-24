@@ -26,7 +26,7 @@ public class TokenIdService {
     private GoogleTokenValidatorService googleTokenValidatorService;
     private JwtTokenService jwtTokenService;
     private NativeUserService nativeUserService;
-
+    private LDAPUserService ldapUserService;
     private UserRepository userRepository;
     private UserUtil userUtil;
 
@@ -39,6 +39,7 @@ public class TokenIdService {
                 user = validateProviderTokenId(tokenRequest);
                 break;
             case "ldap":
+                user = validateLDAPUserDetails(tokenRequest);
                 break;
             case "native":
                 user = validateNativeUserDetails(tokenRequest);
@@ -51,6 +52,10 @@ public class TokenIdService {
         jwtTokenService.validateToken((String) map.get("auth_token"));
 
         return map;
+    }
+
+    private User validateLDAPUserDetails(TokenRequest tokenRequest) {
+      return ldapUserService.validateUserDetails(tokenRequest);
     }
 
     private User validateNativeUserDetails(TokenRequest tokenRequest) {
@@ -73,7 +78,7 @@ public class TokenIdService {
 
         if (null == googleUser) throw new InvalidDetailsException("Invalid Google token");
 
-        Optional<User> user = userRepository.findByEmail(googleUser.getEmail());
+        Optional<User> user = userRepository.findByEmailIgnoreCase(googleUser.getEmail());
         if (user.isPresent()) {
             dbUser = user.get();
         } else {
