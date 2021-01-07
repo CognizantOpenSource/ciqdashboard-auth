@@ -26,6 +26,6 @@ public class BaseConstants {
     public static final String AES_CBC ="AES/CBC/PKCS5Padding";
     public static final int KEY_LENGTH =32;
     public static final int IV_LENGTH =16;
-    public static final int ITERATION =16;
+    public static final int ITERATION =1;
 
 }
