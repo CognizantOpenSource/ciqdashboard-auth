@@ -7,6 +7,7 @@ import com.cognizant.authapi.users.beans.TokenRequest;
 import com.cognizant.authapi.users.beans.User;
 import com.cognizant.authapi.users.dto.UserDTO;
 import com.cognizant.authapi.users.repos.UserRepository;
+import com.cognizant.authapi.users.util.AESUtil;
 import com.cognizant.authapi.users.util.UserUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,8 @@ public class TokenIdService {
     public Map<String, Object> provideToken(TokenRequest tokenRequest) {
         Map<String, Object> map;
         User user = null;
+        String decryptPassword = AESUtil.decryptText(tokenRequest.getPassword());
+        tokenRequest.setPassword(decryptPassword);
         switch (tokenRequest.getType()) {
             case "oauth2":
                 user = validateProviderTokenId(tokenRequest);
@@ -47,7 +50,6 @@ public class TokenIdService {
             default:
                 break;
         }
-
         map = jwtTokenService.generateToken(user);
         jwtTokenService.validateToken((String) map.get("auth_token"));
 
