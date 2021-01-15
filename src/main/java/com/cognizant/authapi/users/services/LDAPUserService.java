@@ -59,7 +59,7 @@ public class LDAPUserService {
         if (optional.isPresent()) {
             User user = optional.get();
             if (!user.isActive())
-                throw new CustomInvalidCredentialException(String.format("User account %s is disabled. Please contact administrator.", tokenRequest.getUsername()));
+                throw new CustomInvalidCredentialException(String.format("Please contact iDashboard administrator to authorize your id."));
             return user;
         } else {
             return generateUser(dirContextOperations);
