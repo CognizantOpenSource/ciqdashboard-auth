@@ -44,7 +44,7 @@ public class TokenIdService {
             case "ldap":
                 user = validateLDAPUserDetails(tokenRequest);
                 break;
-            case "native":
+            case "Native":
                 user = validateNativeUserDetails(tokenRequest);
                 break;
             default:
