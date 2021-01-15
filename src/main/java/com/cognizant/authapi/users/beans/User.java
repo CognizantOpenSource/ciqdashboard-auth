@@ -38,9 +38,7 @@ public class User {
     @JsonIgnore
     @CreatedDate
     private Date createdDate;
-    @JsonIgnore
-    @LastModifiedBy
-    private String lastModifiedUser;
+    //@JsonIgnore @LastModifiedBy private String lastModifiedUser;
     @JsonIgnore
     @LastModifiedDate
     private Instant lastModifiedDate;

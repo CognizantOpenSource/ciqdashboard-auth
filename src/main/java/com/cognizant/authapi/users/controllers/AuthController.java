@@ -29,7 +29,7 @@ public class AuthController {
 
     /**
      * Generating Token based on User details or based on IdToken
-     * For Native type UserName and Password and for providers IdToken should pass based on this it will work
+     * For Native type UserName and Passw0rd and for providers IdToken should pass based on this it will work
      *
      * @param tokenRequest user details
      * @return token and expiry date with time details

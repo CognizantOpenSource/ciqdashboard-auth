@@ -30,8 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenService tokenProvider;
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    //@Autowired
+    //private CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     throw new UserNotFoundException("Inactive or Username not found");
                 }
             }
-        } catch (Exception ex) {
+        } catch (UserNotFoundException | InvalidValueException ex) {
             log.error("Could not authenticate user", ex);
         }
         filterChain.doFilter(request, response);
