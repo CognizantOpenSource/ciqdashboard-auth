@@ -16,4 +16,16 @@ public class BaseConstants {
     public static final String TOKEN_EXPIRES_AT = "tokenExpiresAt";
     public static final String TOKEN_ID = "token-id";
 
+    /*sAMAccountName is the ldap attribute that should match the login name */
+    public static final String SAM_ACCOUNTNAME ="sAMAccountName";
+    public static final String LDAP = "LDAP";
+
+    /*AES Encryption*/
+    public static final String AES_ALGORITHM ="AES";
+    public static final String MSG_DIGEST ="MD5";
+    public static final String AES_CBC ="AES/CBC/PKCS5Padding";
+    public static final int KEY_LENGTH =32;
+    public static final int IV_LENGTH =16;
+    public static final int ITERATION =1;
+
 }

@@ -29,6 +29,7 @@ public class User {
     private String org;
     private Date modifiedDate = new Date();
     private boolean active;
+    private String type;
     @DBRef
     private Account account;
 
@@ -38,9 +39,7 @@ public class User {
     @JsonIgnore
     @CreatedDate
     private Date createdDate;
-    @JsonIgnore
-    @LastModifiedBy
-    private String lastModifiedUser;
+    //@JsonIgnore @LastModifiedBy private String lastModifiedUser;
     @JsonIgnore
     @LastModifiedDate
     private Instant lastModifiedDate;

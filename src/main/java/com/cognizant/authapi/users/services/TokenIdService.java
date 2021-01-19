@@ -7,6 +7,7 @@ import com.cognizant.authapi.users.beans.TokenRequest;
 import com.cognizant.authapi.users.beans.User;
 import com.cognizant.authapi.users.dto.UserDTO;
 import com.cognizant.authapi.users.repos.UserRepository;
+import com.cognizant.authapi.users.util.AESUtil;
 import com.cognizant.authapi.users.util.UserUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ public class TokenIdService {
     private JwtTokenService jwtTokenService;
     private NativeUserService nativeUserService;
 
+    private LDAPUserService ldapUserService;
     private UserRepository userRepository;
     private UserUtil userUtil;
 
@@ -34,13 +36,16 @@ public class TokenIdService {
     public Map<String, Object> provideToken(TokenRequest tokenRequest) {
         Map<String, Object> map;
         User user = null;
+        String decryptPassword = AESUtil.decryptText(tokenRequest.getPassword());
+        tokenRequest.setPassword(decryptPassword);
         switch (tokenRequest.getType()) {
             case "oauth2":
                 user = validateProviderTokenId(tokenRequest);
                 break;
             case "ldap":
+                user = validateLDAPUserDetails(tokenRequest);
                 break;
-            case "native":
+            case "Native":
                 user = validateNativeUserDetails(tokenRequest);
                 break;
             default:
@@ -53,6 +58,9 @@ public class TokenIdService {
         return map;
     }
 
+    private User validateLDAPUserDetails(TokenRequest tokenRequest) {
+        return ldapUserService.validateUserDetails(tokenRequest);
+    }
     private User validateNativeUserDetails(TokenRequest tokenRequest) {
         return nativeUserService.validateUserDetails(tokenRequest);
     }
@@ -63,7 +71,7 @@ public class TokenIdService {
         switch (tokenRequest.getProvider()) {
             case "google":
                 googleUser = googleTokenValidatorService.validateGoogleToken(tokenRequest.getIdToken());
-                log.info(googleUser.toString());
+                //log.info(googleUser.toString());
                 break;
             case "microsoft":
                 break;
@@ -73,7 +81,7 @@ public class TokenIdService {
 
         if (null == googleUser) throw new InvalidDetailsException("Invalid Google token");
 
-        Optional<User> user = userRepository.findByEmail(googleUser.getEmail());
+        Optional<User> user = userRepository.findByEmailIgnoreCase(googleUser.getEmail());
         if (user.isPresent()) {
             dbUser = user.get();
         } else {
@@ -88,7 +96,7 @@ public class TokenIdService {
         switch (tokenRequest.getProvider()) {
             case "google":
                 googleUser = googleTokenValidatorService.validateGoogleToken(tokenRequest.getIdToken());
-                log.info(googleUser.toString());
+                //log.info(googleUser.toString());
                 break;
             case "microsoft":
                 break;
