@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
         // Let people login with either username or email
-        User user = userRepository.findByEmail(username)
+        User user = userRepository.findByEmailIgnoreCase(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email : " + username)
                 );

@@ -13,7 +13,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
     Optional<User> findByEmail(String email);
-
+    Optional<User> findByEmailIgnoreCase(String email);
+    Optional<User> findByEmailIgnoreCaseAndType(String email, String type);
     void deleteByIdIn(List<String> ids);
 
     List<User> findAllByEmailIn(List<String> emails);

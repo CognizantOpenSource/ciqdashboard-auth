@@ -41,7 +41,7 @@ public class UserController {
     @GetMapping(value = "")
     @PreAuthorize("hasPermission('User','leap.user.read')")
     public List<User> getAllUsers() {
-        log.info("Getting all the Users from Database.....!");
+        //log.info("Getting all the Users from Database.....!");
         return userService.getAllUsers();
     }
 
@@ -55,7 +55,7 @@ public class UserController {
     @GetMapping(value = "/{userId}")
     @PreAuthorize("hasPermission('User','leap.user.read')")
     public User getUser(@PathVariable String userId) {
-        log.info("Getting Project id is : " + userId);
+        //log.info("Getting Project id is : " + userId);
         Optional<User> optionalUser = userService.getUser(userId);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
@@ -93,7 +93,7 @@ public class UserController {
     @PutMapping(value = "/{userId}")
     @PreAuthorize("hasPermission('User','leap.user.update')")
     public UserUpdateDTO updateUser(@PathVariable String userId, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
-        log.info("Updating the User data " + userUpdateDTO);
+        //log.info("Updating the User data " + userUpdateDTO);
         User user = userService.assertAndGetUser(userId);
         User updatedUser = userService.updateUser(userUtil.convertToUpdateEntity(userUpdateDTO, user));
         return userUtil.convertToUpdateDto(updatedUser);
@@ -112,8 +112,8 @@ public class UserController {
     public List<User> activateOrDeactivateUser(@RequestBody Map<String, Object> map) {
         boolean active = (boolean) map.get("activate");
         List<String> userIds = (List<String>) map.get("userIds");
-        log.info("Activate flag is " + active);
-        log.info("User Ids List " + userIds.toString());
+        //log.info("Activate flag is " + active);
+        //log.info("User Ids List " + userIds.toString());
         List<User> users = getAllUsersByUserIds(userIds);
         users.forEach(user -> user.setActive(active));
         return userService.updateUserList(users);
