@@ -68,9 +68,14 @@ public class UserService {
      */
     public Optional<User> getUserByEmail(String email) {
         log.info("Getting User based on the email. EmailId is : " + email);
-        return userRepository.findByEmail(email);
+        //return userRepository.findByEmail(email);
+        return userRepository.findByEmailIgnoreCase(email);
     }
 
+    public Optional<User> getUserByEmailAndType(String email, String type) {
+        log.info("Getting User based on the email. EmailId is : " + email);
+        return userRepository.findByEmailIgnoreCaseAndType(email, type);
+    }
 
     /**
      * Updating user details based on the provided details

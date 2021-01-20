@@ -29,6 +29,7 @@ public class User {
     private String org;
     private Date modifiedDate = new Date();
     private boolean active;
+    private String type;
     @DBRef
     private Account account;
 

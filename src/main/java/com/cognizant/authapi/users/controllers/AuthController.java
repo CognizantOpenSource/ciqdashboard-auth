@@ -50,7 +50,7 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/signup")
     public UserDTO signUpUser(@Valid @RequestBody UserDTO userDTO) {
-        log.info("User creation requested '{}'", userDTO.getEmail());
+        //log.info("User creation requested '{}'", userDTO.getEmail());
         return userUtil.convertToDto(userService.signUpUser(userDTO));
     }
 
@@ -63,7 +63,7 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/signup/token")
     public UserDTO tokenBasedSignUpUser(@RequestBody TokenRequest tokenRequest) {
-        log.info("Token Based User SignUp");
+        //log.info("Token Based User SignUp");
         UserDTO dto = authService.getUser(tokenRequest);
         return signUpUser(dto);
     }
