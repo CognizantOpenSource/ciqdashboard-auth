@@ -1,8 +1,7 @@
 package com.cognizant.authapi.base.services;
 
-import com.cognizant.authapi.base.beans.WhiteList;
 import com.cognizant.authapi.base.error.InvalidValueException;
-import com.cognizant.authapi.users.repos.WhiteListRepository;
+//import com.cognizant.authapi.users.repos.WhiteListRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +20,18 @@ public class WhiteListService {
     public static final Boolean ALLOW = true;
     public static final Boolean BLOCK = false;
 
-    private WhiteListRepository repo;
+    //private WhiteListRepository repo;
 
     private Map<String, ListEntry> lists;
 
-    public WhiteListService(WhiteListRepository repo) {
+    /*public WhiteListService(WhiteListRepository repo) {
         this.repo = repo;
         load();
-    }
+    }*/
 
     /**
      * load whitelist from repo and cache them as predicates of allowed & blocked patterns for each type
-     */
+
     private void load() {
         Map<String, Map<Boolean, List<String>>> store = new HashMap<>();
         for (WhiteList entry : repo.findAll()) {
@@ -51,17 +50,18 @@ public class WhiteListService {
                         ListEntry.create(entry.getKey(), entry.getValue().get(ALLOW), entry.getValue().get(BLOCK))))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
-
+    */
     private boolean defaultAction() {
         return BLOCK;
     }
 
     /**
      * refresh whitelists
-     */
+
     public void reload() {
         load();
     }
+     */
 
     public boolean isValid(String type, String target) {
         if (lists.containsKey(type)) {

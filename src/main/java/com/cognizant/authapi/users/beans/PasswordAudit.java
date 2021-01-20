@@ -1,3 +1,4 @@
+/*
 package com.cognizant.authapi.users.beans;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,9 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.time.Instant;
 import java.util.Date;
 
-/**
- * Created by 784420 on 8/9/2019 7:07 PM
- */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,3 +44,4 @@ public class PasswordAudit {
         this.newPassword = new BCryptPasswordEncoder().encode(newPassword);
     }
 }
+*/

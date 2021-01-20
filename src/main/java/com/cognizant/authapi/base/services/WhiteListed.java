@@ -1,3 +1,4 @@
+/*
 package com.cognizant.authapi.base.services;
 
 import javax.validation.Constraint;
@@ -22,4 +23,4 @@ public @interface WhiteListed {
 
     Class<? extends Payload>[] payload() default {};
 
-}
+}*/

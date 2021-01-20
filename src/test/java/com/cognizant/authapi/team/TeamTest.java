@@ -16,6 +16,6 @@ public class TeamTest {
     @Test
     void userBelongsToWhichTeams(){
         List<Team> userBelongsToWhichTeams = service.findUserBelongsToWhichTeams("admin@leap.com");
-        System.out.println(userBelongsToWhichTeams);
+        //System.out.println(userBelongsToWhichTeams);
     }
 }

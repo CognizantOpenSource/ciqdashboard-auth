@@ -1,3 +1,4 @@
+/*
 package com.cognizant.authapi.base.services;
 
 import org.springframework.util.Assert;
@@ -28,3 +29,4 @@ public class WhiteListValidator implements ConstraintValidator<WhiteListed, Obje
     }
 
 }
+*/

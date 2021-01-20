@@ -19,7 +19,7 @@ public class Role {
     private String desc;
     private List<Permission> permissions;
 
-    @JsonIgnore
+   /* @JsonIgnore
     @CreatedBy
     private String user;
     @JsonIgnore
@@ -30,5 +30,5 @@ public class Role {
     private String lastModifiedUser;
     @JsonIgnore
     @LastModifiedDate
-    private Instant lastModifiedDate;
+    private Instant lastModifiedDate;*/
 }
