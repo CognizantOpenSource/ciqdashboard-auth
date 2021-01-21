@@ -32,8 +32,6 @@ public class LDAPUserService {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserLoginDetailsService loginDetailsService;
-    @Autowired
     LdapTemplate ldapTemplate;
     @Value("${ldap.user.mailAttribute}")
     private String mail;

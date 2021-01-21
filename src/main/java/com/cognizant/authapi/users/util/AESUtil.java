@@ -20,8 +20,8 @@ public class AESUtil {
         byte[] cipherData = java.util.Base64.getDecoder().decode(cipherText);
         byte[] saltData = Arrays.copyOfRange(cipherData, 8, 16);
         try{
-            MessageDigest md5 = MessageDigest.getInstance(MSG_DIGEST);
-            final byte[][] keyAndIV = GenerateKeyAndIV(KEY_LENGTH, IV_LENGTH, ITERATION, saltData, secretKey.getBytes(StandardCharsets.UTF_8), md5);
+            MessageDigest msgDigest5 = MessageDigest.getInstance(MSG_DIGEST);
+            final byte[][] keyAndIV = GenerateKeyAndIV(KEY_LENGTH, IV_LENGTH, ITERATION, saltData, secretKey.getBytes(StandardCharsets.UTF_8), msgDigest5);
             SecretKeySpec key = new SecretKeySpec(keyAndIV[0], AES_ALGORITHM);
             IvParameterSpec iv = new IvParameterSpec(keyAndIV[1]);
 
@@ -50,7 +50,7 @@ public class AESUtil {
             // Repeat process until sufficient data has been generated
             while (generatedLength < keyLength + ivLength) {
 
-                // Digest data (last digest if available, password data, salt if available)
+                // Digest data (last digest if available, passw0rd data, salt if available)
                 if (generatedLength > 0)
                     md.update(generatedData, generatedLength - digestLength, digestLength);
                 md.update(password);
@@ -70,7 +70,7 @@ public class AESUtil {
             // Copy key and IV into separate byte arrays
             byte[][] result = new byte[2][];
             result[0] = Arrays.copyOfRange(generatedData, 0, keyLength);
-            if (ivLength > 0)
+            if (ivLength != 0)
                 result[1] = Arrays.copyOfRange(generatedData, keyLength, keyLength + ivLength);
 
             return result;

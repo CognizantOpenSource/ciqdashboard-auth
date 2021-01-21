@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
-            //log.debug("jwt token ****** " + jwt);
+            log.debug("jwt token ****** " + jwt);
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 User user = tokenProvider.getUser(jwt);
                 List<String> permissions = tokenProvider.getPermissions(jwt);
@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (UserNotFoundException | InvalidValueException ex) {
-            //log.error("Could not authenticate user", ex);
+            log.error("Could not authenticate user", ex);
         }
         filterChain.doFilter(request, response);
     }

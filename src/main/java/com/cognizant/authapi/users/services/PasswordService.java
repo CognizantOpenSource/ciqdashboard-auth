@@ -26,7 +26,7 @@ public class PasswordService {
 
     private PasswordEncoder passwordEncoder;
     private UserService userService;
-    //private PasswordAuditRepository repository;
+    //private PasswrdAuditRepositry repository;
 
     private static final String RESPONSE_TEMPLATE = "Password Changed Successfully. for User %s" ;
 
