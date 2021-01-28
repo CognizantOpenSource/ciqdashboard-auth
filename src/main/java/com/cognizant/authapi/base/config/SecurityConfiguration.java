@@ -48,9 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${ldap.base.dn}")
     private String ldapBaseDn;
 
-    @Value("${ldap.user.dn.pattern}")
-    private String ldapUserDnPattern;
-
     @Value("${ldap.user.principal}")
     private String ldapPrincipal;
 

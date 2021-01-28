@@ -5,7 +5,6 @@ import com.cognizant.authapi.base.error.CustomInvalidCredentialException;
 import com.cognizant.authapi.base.error.UserNotFoundException;
 import com.cognizant.authapi.users.beans.User;
 import com.cognizant.authapi.users.beans.UserPrincipal;
-import com.cognizant.authapi.users.repos.PasswordAuditRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,7 @@ public class PasswordService {
 
     private PasswordEncoder passwordEncoder;
     private UserService userService;
-    private PasswordAuditRepository repository;
+    //private PasswrdAuditRepositry repository;
 
     private static final String RESPONSE_TEMPLATE = "Password Changed Successfully. for User %s" ;
 

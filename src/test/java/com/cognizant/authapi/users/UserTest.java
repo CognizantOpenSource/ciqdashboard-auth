@@ -16,7 +16,7 @@ public class UserTest {
 
     @Test
     void userTest(){
-        List<User> allUserByEmails = userService.getAllUserByEmails(Arrays.asList("ram@leap.com", "admin1@leap.com"));
-        System.out.println(allUserByEmails);
+        //List<User> allUserByEmails = userService.getAllUserByEmails(Arrays.asList("ram@leap.com", "admin1@leap.com"));
+        //System.out.println(allUserByEmails);
     }
 }

@@ -1,3 +1,4 @@
+/*
 package com.cognizant.authapi.base.beans;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,7 +19,9 @@ public class WhiteList {
     private String type;
     private List<String> match;
 
-    /* User Auditing fields*/
+    */
+/* User Auditing fields*//*
+
     @JsonIgnore
     @CreatedBy
     private String createdUser;
@@ -33,3 +36,4 @@ public class WhiteList {
     private Instant lastModifiedDate;
 
 }
+*/
