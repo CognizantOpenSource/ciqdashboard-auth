@@ -1,6 +1,6 @@
 package com.cognizant.authapi.users.services;
 
-import com.cognizant.authapi.base.beans.LeapApiResponse;
+import com.cognizant.authapi.base.beans.CIQDashboardApiResponse;
 import com.cognizant.authapi.base.error.CustomInvalidCredentialException;
 import com.cognizant.authapi.base.error.UserNotFoundException;
 import com.cognizant.authapi.users.beans.User;
@@ -42,7 +42,7 @@ public class PasswordService {
         } else {
             throw new CustomInvalidCredentialException("Password", "UserName", principal.getEmail());
         }
-        LeapApiResponse response = new LeapApiResponse(LocalDateTime.now(),
+        CIQDashboardApiResponse response = new CIQDashboardApiResponse(LocalDateTime.now(),
                 HttpStatus.OK.value(),
                 "Success",
                 String.format(RESPONSE_TEMPLATE, principal.getEmail())
@@ -61,7 +61,7 @@ public class PasswordService {
             throw new UserNotFoundException(userEmailId);
         }
 
-        LeapApiResponse response = new LeapApiResponse(LocalDateTime.now(),
+        CIQDashboardApiResponse response = new CIQDashboardApiResponse(LocalDateTime.now(),
                 HttpStatus.OK.value(),
                 "Success",
                 String.format(RESPONSE_TEMPLATE, userEmailId)

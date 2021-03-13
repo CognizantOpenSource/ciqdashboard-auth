@@ -31,7 +31,7 @@ public class PasswordController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/reset")
-    @PreAuthorize("hasPermission('Password','leap.permission.admin')")
+    @PreAuthorize("hasPermission('Password','ciqdashboard.permission.admin')")
     public ResponseEntity resetPassword(@Valid @RequestBody PasswordResetDto data) {
         return passwordService.resetPassword(data.getEmail(), data.getPassword());
     }

@@ -31,7 +31,7 @@ public class SpringDocOpenApiConfig {
                 .description("Auth API REST calls using Spring boot")
                 .version("1.0")
                 .termsOfService("Terms of service")
-                .contact(new Contact().name("Leap").email("cognizantLeap@cognizant.com").url("www.Cognizant.com"))
+                .contact(new Contact().name("CIQDashboard").email("cognizantIQdashboard@cognizant.com").url("www.Cognizant.com"))
                 .license(new License().name("License of API").url("API license URL"));
     }
 

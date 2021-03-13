@@ -14,7 +14,7 @@ import static com.cognizant.authapi.collector.model.BaseConstants.*;
 
 public class AESUtil {
 
-    private static String secretKey = "idashboardSCKey";
+    private static String secretKey = "CIQdashboardSCKey";
 
     public static String decryptText(String cipherText){
         byte[] cipherData = java.util.Base64.getDecoder().decode(cipherText);

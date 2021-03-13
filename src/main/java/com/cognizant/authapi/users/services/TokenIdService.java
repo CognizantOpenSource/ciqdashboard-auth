@@ -24,7 +24,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class TokenIdService {
 
-//    private GoogleTokenValidatorService googleTokenValidatorService;
     private JwtTokenService jwtTokenService;
     private NativeUserService nativeUserService;
 
@@ -70,7 +69,6 @@ public class TokenIdService {
         User dbUser;
         switch (tokenRequest.getProvider()) {
             case "google":
-//                googleUser = googleTokenValidatorService.validateGoogleToken(tokenRequest.getIdToken());
                 //log.info(googleUser.toString());
                 break;
             case "microsoft":
@@ -95,8 +93,6 @@ public class TokenIdService {
         User googleUser = null;
         switch (tokenRequest.getProvider()) {
             case "google":
-//                googleUser = googleTokenValidatorService.validateGoogleToken(tokenRequest.getIdToken());
-                //log.info(googleUser.toString());
                 break;
             case "microsoft":
                 break;

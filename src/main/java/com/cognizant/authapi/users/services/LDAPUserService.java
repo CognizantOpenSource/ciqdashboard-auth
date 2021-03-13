@@ -57,7 +57,7 @@ public class LDAPUserService {
         if (optional.isPresent()) {
             User user = optional.get();
             if (!user.isActive())
-                throw new CustomInvalidCredentialException(String.format("Please contact iDashboard administrator to authorize your id."));
+                throw new CustomInvalidCredentialException(String.format("Please contact CIQDashboard administrator to authorize your id."));
             return user;
         } else {
             return generateUser(dirContextOperations);

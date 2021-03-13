@@ -39,7 +39,7 @@ public class UserController {
      * @return Users List
      */
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('User','leap.user.read')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.read')")
     public List<User> getAllUsers() {
         //log.info("Getting all the Users from Database.....!");
         return userService.getAllUsers();
@@ -53,7 +53,7 @@ public class UserController {
      * @return User details for that userId
      */
     @GetMapping(value = "/{userId}")
-    @PreAuthorize("hasPermission('User','leap.user.read')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.read')")
     public User getUser(@PathVariable String userId) {
         //log.info("Getting Project id is : " + userId);
         Optional<User> optionalUser = userService.getUser(userId);
@@ -91,7 +91,7 @@ public class UserController {
     @Validated
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{userId}")
-    @PreAuthorize("hasPermission('User','leap.user.update')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.update')")
     public UserUpdateDTO updateUser(@PathVariable String userId, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
         //log.info("Updating the User data " + userUpdateDTO);
         User user = userService.assertAndGetUser(userId);
@@ -108,7 +108,7 @@ public class UserController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/activate")
-    @PreAuthorize("hasPermission('User','leap.user.update')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.update')")
     public List<User> activateOrDeactivateUser(@RequestBody Map<String, Object> map) {
         boolean active = (boolean) map.get("activate");
         List<String> userIds = (List<String>) map.get("userIds");
@@ -126,7 +126,7 @@ public class UserController {
      */
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/delete")
-    @PreAuthorize("hasPermission('User','leap.user.delete')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.delete')")
     public void deleteUser(@RequestBody List<String> userIds) {
         userService.deleteUserList(userIds);
     }
