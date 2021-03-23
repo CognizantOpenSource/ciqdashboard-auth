@@ -1,6 +1,6 @@
 #CIQDashboard-auth
 
--swaggerurl: http://localhost:2019/swagger-ui.html
+-swaggerurl: http://<serverName>:<serverPort>/swagger-ui.html
 
 -mongodb-url: mongodb://<username>:<password>@host/<databasename>
   
