@@ -1,3 +1,19 @@
+/*
+ *  © [2021] Cognizant. All rights reserved.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package com.cognizant.authapi.users.controllers;
 
 import com.cognizant.authapi.users.beans.TokenRequest;
@@ -15,7 +31,9 @@ import javax.validation.Valid;
 import java.util.Map;
 
 /**
- * Created by 784420 on 7/18/2019 11:47 AM
+ *AuthController
+ *
+ * @author Cognizant
  */
 @RestController
 @RequestMapping(value = "/auth")
@@ -58,7 +76,7 @@ public class AuthController {
      * Signing up or creating new user based on the Third party application's (Google, Microsoft etc..) token as of now Google implemented
      *
      * @param tokenRequest third party token which is generated and return from application
-     * @return post signing up based on the token will return user detail which are stored in leap DB
+     * @return post signing up based on the token will return user detail which are stored in ciqdashboard DB
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/signup/token")

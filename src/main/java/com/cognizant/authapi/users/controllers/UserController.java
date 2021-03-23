@@ -1,3 +1,19 @@
+/*
+ *  © [2021] Cognizant. All rights reserved.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package com.cognizant.authapi.users.controllers;
 
 import com.cognizant.authapi.base.error.UserNotFoundException;
@@ -21,7 +37,9 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Created by 784420 on 7/22/2019 5:01 PM
+ *UserController
+ *
+ * @author Cognizant
  */
 @RestController
 @RequestMapping(value = "/users")
@@ -39,7 +57,7 @@ public class UserController {
      * @return Users List
      */
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('User','leap.user.read')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.read')")
     public List<User> getAllUsers() {
         //log.info("Getting all the Users from Database.....!");
         return userService.getAllUsers();
@@ -53,7 +71,7 @@ public class UserController {
      * @return User details for that userId
      */
     @GetMapping(value = "/{userId}")
-    @PreAuthorize("hasPermission('User','leap.user.read')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.read')")
     public User getUser(@PathVariable String userId) {
         //log.info("Getting Project id is : " + userId);
         Optional<User> optionalUser = userService.getUser(userId);
@@ -91,7 +109,7 @@ public class UserController {
     @Validated
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{userId}")
-    @PreAuthorize("hasPermission('User','leap.user.update')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.update')")
     public UserUpdateDTO updateUser(@PathVariable String userId, @Valid @RequestBody UserUpdateDTO userUpdateDTO) {
         //log.info("Updating the User data " + userUpdateDTO);
         User user = userService.assertAndGetUser(userId);
@@ -108,7 +126,7 @@ public class UserController {
      */
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/activate")
-    @PreAuthorize("hasPermission('User','leap.user.update')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.update')")
     public List<User> activateOrDeactivateUser(@RequestBody Map<String, Object> map) {
         boolean active = (boolean) map.get("activate");
         List<String> userIds = (List<String>) map.get("userIds");
@@ -126,7 +144,7 @@ public class UserController {
      */
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/delete")
-    @PreAuthorize("hasPermission('User','leap.user.delete')")
+    @PreAuthorize("hasPermission('User','ciqdashboard.user.delete')")
     public void deleteUser(@RequestBody List<String> userIds) {
         userService.deleteUserList(userIds);
     }

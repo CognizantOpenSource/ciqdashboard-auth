@@ -1,3 +1,19 @@
+/*
+ *  © [2021] Cognizant. All rights reserved.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package com.cognizant.authapi.users.controllers;
 
 import com.cognizant.authapi.base.error.AccountNotFoundException;
@@ -21,7 +37,9 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by 784420 on 7/23/2019 3:40 PM
+ *AccountController
+ *
+ * @author Cognizant
  */
 @RestController
 @RequestMapping(value = "/accounts")
@@ -37,7 +55,7 @@ public class AccountController {
      * Getting all Accounts
      **/
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('UserSettings','leap.user.account.read')")
+    @PreAuthorize("hasPermission('UserSettings','ciqdashboard.user.account.read')")
     public List<AccountDTO> getAllAccounts() {
         log.debug("Getting all the Accounts");
         List<Account> accounts = accountService.getAllAccounts();
@@ -48,7 +66,7 @@ public class AccountController {
      * Getting a Account by ID
      **/
     @GetMapping(value = "/{accountId}")
-    @PreAuthorize("hasPermission('UserSettings','leap.user.account.read')")
+    @PreAuthorize("hasPermission('UserSettings','ciqdashboard.user.account.read')")
     public AccountDTO getAccount(@PathVariable String accountId) {
         Optional<Account> optionalAccount = accountService.getAccount(accountId);
         if (optionalAccount.isPresent()) {
@@ -66,7 +84,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{accountId}")
     @Transactional
-    @PreAuthorize("hasPermission('UserSettings','leap.user.account.update')")
+    @PreAuthorize("hasPermission('UserSettings','ciqdashboard.user.account.update')")
     public AccountDTO updateAccount(@Valid @RequestBody AccountDTO accountDTO) {
         List<Role> roleList = addAllRoles(accountDTO.getRoleIds());
         log.debug("Updating the Account data " + accountDTO);

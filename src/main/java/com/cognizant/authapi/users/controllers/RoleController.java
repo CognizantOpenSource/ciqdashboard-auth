@@ -1,3 +1,19 @@
+/*
+ *  © [2021] Cognizant. All rights reserved.
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 package com.cognizant.authapi.users.controllers;
 
 import com.cognizant.authapi.base.error.PermissionNotFoundException;
@@ -24,7 +40,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Created by 784420 on 7/23/2019 3:40 PM
+ *RoleController
+ *
+ * @author Cognizant
  */
 @RestController
 @RequestMapping(value = "/roles")
@@ -41,7 +59,7 @@ public class RoleController {
      * @return list of roles
      */
     @GetMapping(value = "")
-    @PreAuthorize("hasPermission('Role','leap.role.read')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.read')")
     public List<RoleDTO> getAllRoles() {
         log.info("Getting all the Roles from Database.....!");
         return util.convertToDtoList(roleService.getAllRoles());
@@ -53,7 +71,7 @@ public class RoleController {
      * @return role
      */
     @GetMapping(value = "/{roleId}")
-    @PreAuthorize("hasPermission('Role','leap.role.read')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.read')")
     public RoleDTO getRole(@PathVariable String roleId) {
         log.info("Getting Project id is : " + roleId);
         Optional<Role> optionalRole = roleService.getRole(roleId);
@@ -73,7 +91,7 @@ public class RoleController {
     @Validated
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "")
-    @PreAuthorize("hasPermission('Role','leap.role.create')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.create')")
     public RoleDTO addNewRole(@Valid @RequestBody RoleDTO roleDTO) {
         log.info("Adding new Role, Role: " + roleDTO.toString());
         Role role = util.convertToEntity(
@@ -96,7 +114,7 @@ public class RoleController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/addAll")
     @Transactional
-    @PreAuthorize("hasPermission('Role','leap.role.create')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.create')")
     public List<RoleDTO> addMultipleNewRoles(@Valid @RequestBody List<RoleDTO> roleDTOList) {
         log.info("Adding new Role, Role: " + roleDTOList.toString());
         List<Role> roleList = roleDTOList.stream()
@@ -118,7 +136,7 @@ public class RoleController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{roleId}")
     @Transactional
-    @PreAuthorize("hasPermission('Role','leap.role.update')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.update')")
     public RoleDTO updateRole(@Valid @RequestBody RoleDTO roleDTO) {
         log.info("Updating the Role data " + roleDTO.toString());
         assertRole(roleDTO.getName());
@@ -135,7 +153,7 @@ public class RoleController {
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/{roleId}")
-    @PreAuthorize("hasPermission('Role','leap.role.delete')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.delete')")
     public void removeRole(@PathVariable String roleId) {
         log.info("Deleting Role based on id, id is : " + roleId);
         assertRole(roleId);
@@ -148,7 +166,7 @@ public class RoleController {
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/remove")
-    @PreAuthorize("hasPermission('Role','leap.role.delete')")
+    @PreAuthorize("hasPermission('Role','ciqdashboard.role.delete')")
     public void deleteUser(@RequestBody List<String> roleIds) {
         roleService.deleteRoles(roleIds);
     }
