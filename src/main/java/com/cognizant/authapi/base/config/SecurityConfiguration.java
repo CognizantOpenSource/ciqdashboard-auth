@@ -81,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -93,6 +93,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             configuration.setAllowedOrigins(Arrays.asList(allowedOrigin));
             configuration.addAllowedMethod(HttpMethod.PUT);
             configuration.addAllowedMethod(HttpMethod.DELETE);
+            configuration.addAllowedMethod(HttpMethod.POST);
+            configuration.addAllowedMethod(HttpMethod.GET);
             configuration.setAllowCredentials(true);
             source.registerCorsConfiguration("/**", configuration);
         }

@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test")
 public class TestController {
 
+    /*
     @GetMapping("/{id}")
     public String get(@PathVariable String id){
         return String.format("test with id: %s", id);
@@ -39,4 +40,5 @@ public class TestController {
     public String greet(@PathVariable String name){
         return String.format("Hello, %s", name);
     }
+     */
 }

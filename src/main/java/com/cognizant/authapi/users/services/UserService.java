@@ -74,7 +74,7 @@ public class UserService {
      * @return user details post storing in teh db
      */
     public User addNewUser(@RequestBody User user) {
-        log.info("Saving the Project data: " + user.toString());
+        log.info("Saving the Project data");
         return userRepository.insert(user);
     }
 
@@ -85,13 +85,13 @@ public class UserService {
      * @return
      */
     public Optional<User> getUserByEmail(String email) {
-        log.info("Getting User based on the email. EmailId is : " + email);
+        log.info("Getting User based on the email");
         //return userRepository.findByEmail(email);
         return userRepository.findByEmailIgnoreCase(email);
     }
 
     public Optional<User> getUserByEmailAndType(String email, String type) {
-        log.info("Getting User based on the email. EmailId is : " + email);
+        log.info("Getting User based on the email");
         return userRepository.findByEmailIgnoreCaseAndType(email, type);
     }
 

@@ -85,6 +85,7 @@ public class TokenIdService {
     private User validateProviderTokenId(TokenRequest tokenRequest) {
         User googleUser = null;
         User dbUser;
+        /*
         switch (tokenRequest.getProvider()) {
             case "google":
                 //log.info(googleUser.toString());
@@ -93,7 +94,7 @@ public class TokenIdService {
                 break;
             default:
                 break;
-        }
+        }*/
 
         if (null == googleUser) throw new InvalidDetailsException("Invalid Google token");
 
@@ -109,6 +110,7 @@ public class TokenIdService {
 
     public UserDTO getUser(TokenRequest tokenRequest) {
         User googleUser = null;
+        /*
         switch (tokenRequest.getProvider()) {
             case "google":
                 break;
@@ -116,7 +118,7 @@ public class TokenIdService {
                 break;
             default:
                 break;
-        }
+        }*/
         return userUtil.convertToDto(googleUser);
     }
 }
