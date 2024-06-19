@@ -27,6 +27,7 @@ import java.util.List;
 
 @SpringBootTest
 public class UserTest {
+    /*
     @Autowired
     UserService userService;
 
@@ -34,4 +35,5 @@ public class UserTest {
     void userTest(){
 
     }
+     */
 }

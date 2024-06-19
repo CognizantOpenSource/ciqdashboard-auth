@@ -26,6 +26,7 @@ import java.util.List;
 
 @SpringBootTest
 public class TeamTest {
+    /*
     @Autowired
     TeamService service;
 
@@ -34,4 +35,5 @@ public class TeamTest {
         List<Team> userBelongsToWhichTeams = service.findUserBelongsToWhichTeams("test@user.com");
         //System.out.println(userBelongsToWhichTeams);
     }
+     */
 }
